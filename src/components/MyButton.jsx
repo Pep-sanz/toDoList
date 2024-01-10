@@ -1,11 +1,11 @@
 import { Button } from "antd";
 
 // eslint-disable-next-line react/prop-types
-export default function MyButton({ handleOnClick, logo}) {
+export default function MyButton({ styleType, handleOnClick, label,}) {
   return (
     <>
-      <Button type="primary" onClick={handleOnClick} className="h-[35px] w-[80px] flex justify-center items-center text-2xl bg-neutral-400">
-        {logo}
+      <Button onClick={handleOnClick} className={`flex justify-center items-center border-0 ${styleType}`}>
+        {label}
       </Button>
       
     </>
