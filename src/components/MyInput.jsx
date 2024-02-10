@@ -1,7 +1,15 @@
-export default function MyInput({ handleOnChange, handleOnSubmit, name, styleType }) {
+import { Flex, Input, Form } from "antd";
+import MyButton from "./MyButton";
+
+export default function MyInput({ styleType, handleGetList }) {
+  const handleOnChange = (e) => {
+    handleGetList(e.target.value);
+  };
   return (
-    <form onSubmit={(e) => handleOnSubmit(e)} className="flex flex-col">
-      <input type="text" value={name} onChange={(e) => handleOnChange(e.target.value)} className={`h-[35px] px-2 rounded ${styleType}`} placeholder="Masukan List" />
-    </form>
+    <>
+      <Form.Item className={`${styleType}`} name="list" rules={[{ required: true, message: "please enter your list name" }]}>
+        <Input type="text" onChange={handleOnChange} />
+      </Form.Item>
+    </>
   );
 }

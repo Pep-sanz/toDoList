@@ -2,20 +2,28 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-
-.custom-modal .ant-modal-content{
-    background-color: rgb(14 116 144 )
+.custom-modal .ant-modal-content {
+  background-color: rgb(14 116 144) !important;
 }
 
-.custom-modal .ant-modal-body{
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 16px;
+.custom-modal .ant-modal-body {
+  height: 150px !important;
+  display: flex !important;
+  justify-content: center !important;
+  flex-direction: column !important;
 }
 
-.custom-modal .ant-modal-title{
-    background-color: rgb(14 116 144 )
+.custom-modal .ant-modal-title {
+  background-color: rgb(14 116 144) !important;
 }
 
+.form-dueDate {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ant-form-item-required {
+  color: white !important;
+}

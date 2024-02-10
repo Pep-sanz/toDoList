@@ -1,41 +1,31 @@
-import { useState } from "react";
-import MyInput from "./MyInput";
+import { Form, Flex } from "antd";
 import MyDueDate from "./MyDueDate";
+import MyInput from "./MyInput";
 import MyButton from "./MyButton";
+import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
 export default function InputList({ handleAddItem }) {
-  const [name, setName] = useState("");
-  const [dueDate, setDueDate] = useState(null);
+  const [form] = Form.useForm();
+  const [list, setList] = useState("");
+  const [date, setDate] = useState(null);
+  const [time, setTime] = useState(null);
 
-  const handleGetName = (name) => {
-    setName(name);
-  };
-
-  const handleGetDueDate = (dueDate) => {
-    setDueDate(dueDate);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!name) return;
-
-    const newItem = { name, dueDate, id: Date.now() };
-    handleAddItem(newItem);
-
-    setName("");
-    setDueDate(null);
+  const onFinish = () => {
+    const newItems = { list, date, time, id: Date.now() };
+    handleAddItem(newItems);
+    form.resetFields();
   };
 
   return (
-    <div className="container flex flex-col gap-3 mt-[40px] pb-6 border-b-2">
-      <div className="w-[58vw] flex m-auto">
-        <MyDueDate handleOnChange={handleGetDueDate} />
-      </div>
-      <div className="container flex justify-center items-center gap-3">
-        <MyInput handleOnChange={handleGetName} name={name} handleOnSubmit={handleSubmit} styleType="w-[50vw]" />
-        <MyButton handleOnClick={handleSubmit} label="Add Task" styleType="bg-cyan-700 text-xl font-racingSansOne text-white" />
-      </div>
+    <div className="container mt-10 border-b-2 pb-6">
+      <Form className="form-input-list" onFinish={onFinish} autoComplete="off" form={form}>
+        <MyDueDate handleGetDate={setDate} handleGetTime={setTime} />
+        <Flex justify="center" gap={16}>
+          <MyInput styleType="w-[800px]" handleGetList={setList} />
+          <MyButton label="Tambah" styleType="bg-cyan-700 text-xl font-racingSansOne text-white" />
+        </Flex>
+      </Form>
     </div>
   );
 }

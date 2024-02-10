@@ -14,14 +14,14 @@ function App() {
     setItems((items) => items.filter((item) => item.id !== id));
   }
 
-  const handleEditItem=(newTask)=>{
-    setItems(newTask)
-  }
+  const handleEditItem = (newTask) => {
+    setItems(newTask);
+  };
 
   return (
     <div className="w-full h-screen bg-zinc-800 flex flex-col items-center pt-[45px] font-poppins">
       <Header />
-      <InputList handleAddItem={handleAddItem} /> 
+      <InputList handleAddItem={handleAddItem} />
       <ContainerList items={items} handleRemoveItem={handleRemoveItem} handleEditItem={handleEditItem} />
     </div>
   );

@@ -1,27 +1,26 @@
-import { DatePicker, Select, TimePicker } from "antd";
-import { useState } from "react";
-const { Option } = Select;
-// eslint-disable-next-line react/prop-types
-const PickerWithType = ({ type, onChange }) => {
-  if (type === "time") return <TimePicker onChange={onChange} />;
-  if (type === "date") return <DatePicker onChange={onChange} />;
-  return <DatePicker picker={type} onChange={onChange} />;
-};
+import { DatePicker, TimePicker, Form, Flex, Space } from "antd";
 
-export default function MyDueDate({ handleOnChange }) {
-  const [type, setType] = useState("Jam");
+export default function MyDueDate({ handleGetDate, handleGetTime, styleType, date, time }) {
+  const handleOnChangeDate = (vlaues, valuesString) => {
+    handleGetDate(valuesString);
+  };
+
+  const handleOnChangeTime = (vlaues, valuesString) => {
+    handleGetTime(valuesString);
+  };
   return (
-    <div className="flex flex-col gap-3">
-      <p className="text-white">Target Selesai : </p>
-      <div className="flex gap-2">
-        <Select value={type} onChange={setType}>
-          <Option value="time">Jam</Option>
-          <Option value="date">Tanggal</Option>
-          <Option value="week">Minggu</Option>
-          <Option value="month">Bulan</Option>
-        </Select>
-        <PickerWithType type={type} onChange={(dates, dateString) => handleOnChange(dateString)} />
-      </div>
+    <div className={`ps-[180px] w-full ${styleType}`}>
+      <Flex gap={8}>
+        <p className="text-white">Target Selesai : </p>
+        <Space>
+          <Form.Item name="date" rules={[{ required: true, message: "please enter your date" }]}>
+            <DatePicker placeholder="pilih tanggal" onChange={handleOnChangeDate} />
+          </Form.Item>
+          <Form.Item name="time" rules={[{ required: true, message: "please enter your time" }]}>
+            <TimePicker placeholder="pilih jam" onChange={handleOnChangeTime} />
+          </Form.Item>
+        </Space>
+      </Flex>
     </div>
   );
 }
